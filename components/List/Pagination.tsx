@@ -10,12 +10,12 @@ type Props = {
   isLoading: boolean;
 };
 
-const classNames = "w-10 h-10 rounded border-none flex items-center justify-center bg-gray-600 text-white ml-4"
+const classNames = "w-8 h-8 rounded border-none flex items-center justify-center bg-gray-600 text-white ml-4"
 
 export const Pagination: FC<Props> = ({ currentPage, totalPages, setPage, isLoading }) => {
 
   return (
-    <div className="flex">
+    <div className="flex items-center">
       <Button disabled={isLoading || currentPage === 1} onClick={() => setPage(currentPage - 1)} className={classNames + " " + (currentPage === 1 ? "opacity-50" : "")}>
         <PrevIcon/>
       </Button>

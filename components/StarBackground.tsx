@@ -117,7 +117,7 @@ const StarBackground = () => {
     };
   }, []);
 
-  return <canvas ref={canvasRef} className="fixed w-full h-full top-0 left-0 -z-10" />;
+  return <canvas ref={canvasRef} className="fixed w-full h-full top-0 left-0 -z-10 bg-black" />;
 };
 
 export default StarBackground;
