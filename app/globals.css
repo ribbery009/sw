@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css?family=Fjalla+One");
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -16,12 +18,61 @@
   }
 }
 
+* {
+  font-family: "Fjalla One", sans-serif;
+}
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: transparent;
+  position: relative;
+}
+
+input[type="text"]{
+ 
+color:black;
+}
+
+input[type="text"]:focus{
+  outline: none;
+  box-shadow: 0 0 10px #eab308;
+}
+.card-wrapper:hover {
+  transform: scale(1.03);
+}
+
+.card-wrapper:hover h3::after {
+  width: 100%;
+}
+
+.card-wrapper h3::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: #eab308;
+  transition: width 0.3s;
+}
+
+.card-wrapper img {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+.modal-open {
+  animation: slide-down 0.3s ease-in-out forwards;
+}
+
+.modal-wrapper{
+  background: linear-gradient(110deg, #2196f3,  #F00000);
 }

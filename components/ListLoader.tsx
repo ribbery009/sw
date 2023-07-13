@@ -1,20 +1,14 @@
-import Loader from "./Loader"
+import React from 'react';
+import FightLoader from './FightLoader';
 
 const ListLoader = () => {
-    const styles = {
-      borderRadius: '0.475rem',
-      color: '#7e8299',
-      fontWeight: '500',
-      margin: '0',
-      width: 'auto',
-      padding: '1rem 2rem',
-      top: 'calc(50% - 2rem)',
-      left: 'calc(50% - 4rem)',
-      zIndex:'1'
-    }
-  
-    return <div style={{...styles, position: 'absolute', textAlign: 'center'}}><Loader stroke='rgb(54, 153, 255)' width={80} height={80} /></div>
-  }
-  
-  export {ListLoader}
-  
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-10">
+            <div className="rounded-md text-gray-400 font-medium flex items-center justify-center">
+                <FightLoader/>
+            </div>
+        </div>
+    );
+}
+
+export { ListLoader };
