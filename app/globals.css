@@ -18,6 +18,32 @@
   }
 }
 
+@keyframes crawl {
+  0% {
+    /* The element starts below the screen */
+    top: 0;
+    /* Rotate the text 20 degrees but keep it close to the viewer */
+    transform: rotateX(20deg) translateZ(0);
+  }
+  100% { 
+    /* This is a magic number, but using a big one to make sure the text is fully off the screen at the end */
+    top: -6000px;
+    /* Slightly increasing the rotation at the end and moving the text far away from the viewer */
+    transform: rotateX(25deg) translateZ(-2500px);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+
+
 * {
   font-family: "Fjalla One", sans-serif;
 }
@@ -58,15 +84,6 @@ input[type="text"]:focus{
 .card-wrapper img {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
-}
-
-@keyframes slide-down {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(0%);
-  }
 }
 
 .modal-open {

@@ -50,48 +50,61 @@ const CardList: FC<CardListProps> = ({ cards }) => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 text-black max-w-[1600px] mx-auto">
-      {showModal && (
-        <Modal title={selectedCard?.name} onClose={() => setShowModal(false)}>
-          <div className="flex gap-2 flex-col">
-            <SectionTitle
-              classNames="text-black font-extrabold"
-              title="Személyes Adatok"
-              size={"tiny"}
-            />
-            <DataList
-              data={{
-                Magasság: selectedCard?.height,
-                Súly: selectedCard?.mass,
-                "Születési dátum": selectedCard?.birth_year,
-                "Filmek száma": selectedCard?.films?.length,
-              }}
-            />
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 text-black max-w-[1600px] mx-auto">
+        {showModal && (
+          <Modal title={selectedCard?.name} onClose={() => setShowModal(false)}>
+            <div className="flex gap-2 flex-col">
+              <SectionTitle
+                classNames="text-black font-extrabold"
+                title="Személyes Adatok"
+                size={"tiny"}
+              />
+              <DataList
+                data={{
+                  Magasság: selectedCard?.height,
+                  Súly: selectedCard?.mass,
+                  "Születési dátum": selectedCard?.birth_year,
+                  "Filmek száma": selectedCard?.films?.length,
+                }}
+              />
+            </div>
+            <div className="flex flex-col gap-2 mt-4">
+              <SectionTitle
+                classNames="text-black font-extrabold"
+                title="Szülőföld"
+                size={"tiny"}
+              />
+              <DataList
+                data={{
+                  Neve: currentPlanet?.name,
+                  Klíma: currentPlanet?.climate,
+                  Terep: currentPlanet?.terrain,
+                }}
+              />
+            </div>
+          </Modal>
+        )}
+        {cards.map((card) => (
+          <div key={card.created} className="flex justify-center">
+            <Button onClick={() => handleCardClick(card)}>
+              <Card key={card.name} title={card.name} id={getUrlId(card.url)} />
+            </Button>
           </div>
-          <div className="flex flex-col gap-2 mt-4">
-            <SectionTitle
-              classNames="text-black font-extrabold"
-              title="Szülőföld"
-              size={"tiny"}
-            />
-            <DataList
-              data={{
-                Neve: currentPlanet?.name,
-                Klíma: currentPlanet?.climate,
-                Terep: currentPlanet?.terrain,
-              }}
-            />
-          </div>
-        </Modal>
-      )}
-      {cards.map((card) => (
-        <div key={card.created} className="flex justify-center">
-          <Button onClick={() => handleCardClick(card)}>
-            <Card key={card.name} title={card.name} id={getUrlId(card.url)} />
-          </Button>
+        ))}
+      </div>
+
+      {cards.length == 0 && (
+        <div className="empty-wrapper">
+          <SectionTitle
+            title="Nincs találat"
+            classNames="
+    text-yellow-400 font-bold text-left"
+            size="large"
+          />
         </div>
-      ))}
-    </div>
+      )}
+    </>
   );
 };
 
