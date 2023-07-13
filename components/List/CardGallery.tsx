@@ -16,23 +16,19 @@ type PersonResp = {
   previous?: string;
 };
 export const CardGallery = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const debouncedPage = useDebounce(currentPage, 800);
-  const [searchTerm, setSearchTerm] = useState("");
-  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
-  const [previousSearchTerm, setPreviousSearchTerm] = useState("");
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [changeType, setChangeType] = useState<string | null | undefined>(undefined);
+  const [debouncedPage, debouncedSearchTerm] = useDebounce([currentPage, searchTerm], 800);
   const [cards, setCards] = useState<PersonResp>({
     results: [],
     count: 0,
   });
 
   const fetchPeopleList = useCallback(
-    async (pageNum?: number) => {
-      const url = `https://swapi.dev/api/people/?page=${
-        previousSearchTerm !== searchTerm ? 1 : debouncedPage
-      }&search=${debouncedSearchTerm}`;
+    async () => {
+      const url = `https://swapi.dev/api/people/?page=${debouncedPage}&search=${debouncedSearchTerm}`;
 
       try {
         await ApiCall({
@@ -49,19 +45,21 @@ export const CardGallery = () => {
           },
           onFinal: () => {
             setIsLoading(false);
-            setPreviousSearchTerm(searchTerm);
           },
         });
       } catch (error) {
         console.error("Hiba történt az adatok lekérése során.", error);
       }
     },
-    [debouncedSearchTerm, debouncedPage]
+    [debouncedPage, debouncedSearchTerm]
   );
+
 
   useEffect(() => {
     fetchPeopleList();
   }, [fetchPeopleList]);
+
+
 
   const changeSearchTerm = (newSearchTerm: string) => {
     setSearchTerm(newSearchTerm);
@@ -85,7 +83,7 @@ export const CardGallery = () => {
 
           <Pagination
             currentPage={currentPage}
-            totalPages={Math.ceil(cards.count / cards.results.length)}
+            totalPages={Math.ceil(cards.count / 10)}
             setPage={setCurrentPage}
             isLoading={isLoading}
           />

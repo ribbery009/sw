@@ -11,7 +11,7 @@ export function useDebounce<T>(value: T, delay: number): T {
     return () => {
       clearTimeout(handler);
     };
-  }, [value, delay]);
+  }, [value, delay]); // 'value' now could be a tuple [currentPage, searchTerm]
 
   return debouncedValue;
 }

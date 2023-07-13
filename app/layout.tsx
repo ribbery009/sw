@@ -8,9 +8,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Star Wars Characters",
   description: "Star Wars Characters List",
-  icons: {
-    icon: '/logo.ico',
-  },
 };
 
 export default function RootLayout({
@@ -22,7 +19,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <link rel='shortcut icon'   href="/logo.ico" />
       </head>
 
       <body className={inter.className}>
