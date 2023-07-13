@@ -8,7 +8,7 @@ export function Header() {
     <header className="flex items-center justify-between px-8 relative bg-white bg-opacity-10 border-b border-b-amber-300">
       <Link href="/">
         {" "}
-        <LogoIcon width={100}/>
+        <LogoIcon width={100} height={120}/>
       </Link>
 
      

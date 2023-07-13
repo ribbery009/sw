@@ -70,13 +70,13 @@ export const CardGallery = () => {
 
   return (
     <div className="px-8 pb-14">
-      <div className="py-4">
+      <div className="pt-4">
         <SectionTitle
           title="Szereplők"
           classNames="text-yellow-400 font-bold text-left"
           size="large"
         />
-        <div className="flex justify-between my-4 flex-col sm:flex-row gap-3">
+        <div className="flex justify-between my-4 flex-col sm:flex-row gap-3 pb-4">
           <SearchList
             searchTerm={searchTerm}
             setSearchTerm={changeSearchTerm}

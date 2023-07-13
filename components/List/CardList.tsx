@@ -50,7 +50,7 @@ const CardList: FC<CardListProps> = ({ cards }) => {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 text-black">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 text-black max-w-[1600px] mx-auto">
       {showModal && (
         <Modal title={selectedCard?.name} onClose={() => setShowModal(false)}>
           <div className="flex gap-2 flex-col">
