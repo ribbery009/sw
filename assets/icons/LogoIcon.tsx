@@ -1,8 +1,8 @@
 import * as React from "react"
-const LogoIcon = () => (
+const LogoIcon = ({width}:{width:number}) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={144}
+    width={width}
     height={144}
     viewBox="0 0 48 48"
   >

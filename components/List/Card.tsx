@@ -7,7 +7,7 @@ type CardProps = {
 
 export const Card: FC<CardProps> = ({title, id}) => {
   return (
-    <div className="w-[15rem] relative transition-all">
+    <div className="w-[15rem] relative transition-all mx-auto">
       <img
         src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`}
         alt={`Imagem de ${title}`}

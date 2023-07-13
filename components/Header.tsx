@@ -10,7 +10,7 @@ export function Header() {
     <header className="flex items-center justify-between px-8">
       <Link href="/">
         {" "}
-        <LogoIcon />
+        <LogoIcon width={100}/>
       </Link>
 
       <nav className="flex items-center justify-between">

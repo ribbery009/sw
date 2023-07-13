@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { Person } from "@/app/lib/types/person";
 import { ListLoader } from "../ListLoader";
 import CardList from "./CardList";
-
+import { useDebounce } from "@/hooks/useDebounse";
 
 type PersonResp = {
   results: Person[];
@@ -14,15 +14,14 @@ type PersonResp = {
   previous?: string;
 };
 export const CardGallery = () => {
-  
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cards, setCards] = useState<PersonResp>(
-    {
-      results: [],
-      count: 0,
-    }
-  );
+  const debouncedPage = useDebounce(currentPage, 500);
+
+  const [cards, setCards] = useState<PersonResp>({
+    results: [],
+    count: 0,
+  });
 
   const fetchPeopleList = useCallback(async (url: string) => {
     try {
@@ -48,21 +47,16 @@ export const CardGallery = () => {
   }, []);
 
   useEffect(() => {
-    fetchPeopleList('https://swapi.dev/api/people/');
-  }, []);
+    const url = `https://swapi.dev/api/people/?page=${debouncedPage}`;
+    fetchPeopleList(url);
+  }, [debouncedPage]);
 
   const handleNextPage = () => {
-    if (cards.next) {
-      fetchPeopleList(cards.next);
-      setCurrentPage(currentPage + 1);
-    }
+    setCurrentPage(currentPage + 1);
   };
 
   const handlePrevPage = () => {
-    if (cards.previous) {
-      fetchPeopleList(cards.previous);
-      setCurrentPage(currentPage - 1)
-    }
+    setCurrentPage(Math.max(1, currentPage - 1));
   };
 
   if (!cards.results) {
@@ -72,17 +66,19 @@ export const CardGallery = () => {
   return (
     <div className="px-8">
       <div className="">
+        <div className="flex justify-between mb-4">
+          <h1 className="text-3xl text-yellow-400 font-bold">Szereplők</h1>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={Math.ceil(cards.count / cards.results.length)}
+            setPage={setCurrentPage}
+            isLoading={isLoading}
+          />
+        </div>
+
         <CardList cards={cards.results} />
       </div>
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={Math.ceil(cards.count / cards.results.length)}
-        onNextPage={handleNextPage}
-        onPrevPage={handlePrevPage}
-        next={cards?.next}
-        previous={cards?.previous}
-      />
       {isLoading && <ListLoader />}
     </div>
   );
